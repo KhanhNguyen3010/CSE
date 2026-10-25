@@ -26,16 +26,15 @@
 
 <body class="bg-surface font-body-md text-on-surface antialiased">
   <header class="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-lg shadow-sm border-b border-gray-100">
-
     <!-- Main Navigation -->
-    <div class="max-w-[1400px] mx-auto px-6 h-20 flex items-center justify-between gap-8">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-4">
       <!-- Logo -->
       <a href="../index.html" class="flex items-center gap-3 shrink-0 group">
         <img alt="Craft Link Heritage Logo"
-          class="h-10 w-auto object-contain transition-transform group-hover:scale-105"
+          class="h-9 sm:h-10 w-auto object-contain transition-transform group-hover:scale-105"
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhxZHgqwl09Uzofz21BtUSqe8y4LXLZlHjhsrlcmCxyuEV1ZArTaGXStarugkKmhBemL7Mqmal5XoJe19C-24ZTWXQZ_SfC9_cFtdlQiRbygt-FcTHZORNtERKETXhtF3InaeLB0mHQA7OALAZ78tMAgEY0MCbvnHSzI-Zlpilk1999JlSrT6ZKrwBP4zXcTPhnPM77_5PXcO09sN6xO47H4FBz6PxlfzH5bSya1-emdbI75e45SCd" />
         <div class="flex flex-col hidden sm:flex">
-          <span class="text-lg text-primary font-bold tracking-wide">CRAFT LINK</span>
+          <span class="text-base sm:text-lg text-primary font-bold tracking-wide">CRAFT LINK</span>
           <span class="text-[9px] text-gray-500 tracking-[0.2em] uppercase">Di sản thủ công Việt</span>
         </div>
       </a>
@@ -48,36 +47,36 @@
         <a href="buyer-marketplace.html"
           class="text-gray-700 hover:text-primary font-medium text-[15px] transition-colors whitespace-nowrap relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all">Sàn
           khám phá</a>
-        <a href="#"
-          class="text-gray-700 hover:text-primary font-medium text-[15px] transition-colors whitespace-nowrap relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all">Câu
-          chuyện nghệ nhân</a>
         <a href="impact.html"
           class="text-gray-700 hover:text-primary font-medium text-[15px] transition-colors whitespace-nowrap relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all">Về
           chúng tôi & Tác động</a>
         <a href="buyer-custom-brief.html"
           class="text-gray-700 hover:text-primary font-medium text-[15px] transition-colors whitespace-nowrap relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all">Đặt
           Làm Riêng</a>
+        <a href="buyer-orders.html"
+          class="text-gray-700 hover:text-primary font-medium text-[15px] transition-colors whitespace-nowrap relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all">Đơn
+          hàng</a>
       </nav>
 
       <!-- Actions -->
-      <div class="flex items-center gap-4 shrink-0">
-        <div class="flex items-center gap-1.5">
+      <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+        <div class="flex items-center gap-1 sm:gap-1.5">
           <a href="#"
             class="relative p-2 text-gray-600 hover:text-primary hover:bg-primary/10 rounded-full transition-all">
-            <span class="material-symbols-outlined">favorite</span>
+            <span class="material-symbols-outlined text-[22px]">favorite</span>
             <span
               class="absolute top-0 right-0 w-4 h-4 rounded-full bg-[#E5484D] text-white text-[10px] font-bold flex items-center justify-center border-2 border-white shadow-sm">5</span>
           </a>
-          <a href="#"
+          <a href="buyer-cart.html"
             class="relative p-2 text-gray-600 hover:text-primary hover:bg-primary/10 rounded-full transition-all">
-            <span class="material-symbols-outlined">shopping_bag</span>
-            <span
+            <span class="material-symbols-outlined text-[22px]">shopping_bag</span>
+            <span id="nav-cart-count"
               class="absolute top-0 right-0 w-4 h-4 rounded-full bg-[#E5484D] text-white text-[10px] font-bold flex items-center justify-center border-2 border-white shadow-sm">3</span>
           </a>
           <!-- Account Dropdown -->
           <div class="relative group">
             <a href="login.html"
-              class="ml-2 flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white hover:opacity-90 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 cursor-pointer">
+              class="ml-1 sm:ml-2 flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-primary text-white hover:opacity-90 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 cursor-pointer">
               <span class="material-symbols-outlined text-[20px]">person</span>
             </a>
             
@@ -117,6 +116,12 @@
             </div>
           </div>
         </div>
+
+        <!-- Hamburger Button for Mobile / Tablet -->
+        <button id="mobile-menu-btn" type="button" aria-label="Mở menu điều hướng"
+          class="lg:hidden p-2 text-gray-700 hover:text-primary hover:bg-primary/10 rounded-xl transition-all flex items-center justify-center cursor-pointer">
+          <span class="material-symbols-outlined text-[26px]">menu</span>
+        </button>
       </div>
     </div>
   </header>
@@ -133,7 +138,7 @@
                 <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Hành trình 28
                   năm Di sản &amp; Sinh kế bền vững</span>
               </div>
-              <h1 class="font-display-lg text-display-md lg:text-display-lg text-primary tracking-tight">
+              <h1 class="font-display-lg text-2xl sm:text-4xl lg:text-display-lg text-primary tracking-tight">
                 Hơn 28 Năm Đồng Hành Cùng Di Sản &amp; Sinh Kế Bản Địa Việt Nam
               </h1>
               <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed max-w-2xl">
@@ -154,7 +159,7 @@
                 </a>
               </div>
               <!-- Trust Badges -->
-              <div class="pt-space-lg flex items-center gap-gutter text-on-surface-variant">
+              <div class="pt-space-lg flex flex-wrap items-center gap-3 sm:gap-gutter text-on-surface-variant">
                 <div class="flex items-center gap-2">
                   <span class="material-symbols-outlined text-secondary text-[22px]">workspace_premium</span>
                   <span class="font-body-sm text-body-sm font-medium">WFTO Guaranteed Fair Trade</span>
@@ -1026,6 +1031,7 @@
       </div>
     </div>
   </footer>
+  <script src="../assets/js/responsive-nav.js"></script>
 </body>
 
 </html>

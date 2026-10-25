@@ -232,3 +232,31 @@ The shape system embraces **Roundedness Level 2 (8px - 16px)** to reflect organi
 
 ### Community / Artisan Impact Card (Specialty Component)
 - Horizontal dual-container with warm `#FAF9F5` surface. Left side frames an authentic artisan portrait with 12px radius; right side displays the craftswoman's biography, ethnic group history, village location, and an impact stat (e.g., "Directly supports 14 weaving families in Mai Châu").
+
+---
+
+## Multi-Role & Cross-System Components (Thành phần Đa vai trò)
+
+### 1. Unified Translucent Header (Thanh điều hướng Kính mờ Đồng bộ)
+- **Container:** `bg-white/95 backdrop-blur-lg border-b border-gray-100/80 shadow-2xs sticky top-0 z-50`.
+- **Role Identity Badges:**
+  - **Buyer (Khách hàng):** Brand `#2A3B32` (Deep Forest), avatar `person`.
+  - **Maker (Nghệ nhân):** Brand `#9A4526` (Terracotta Clay), avatar `palette`.
+  - **Moderator (Kiểm duyệt):** Brand `#D4A359` (Ochre Gold), avatar `gavel`.
+  - **Admin (Quản trị):** Brand `#15251D` (Obsidian Green), avatar `shield_person`.
+- **Avatar Dropdown:** Kích thước tròn hoàn hảo `w-9 h-9 sm:w-10 sm:h-10 rounded-full`, hiệu ứng hover nâng nổi (`hover:-translate-y-0.5 shadow-md`). Menu xổ xuống tích hợp sẵn: Thông tin hồ sơ, Lối tắt chuyển vai nhanh, Liên kết trang quản trị và Nút Đăng xuất (`logoutDemo()`).
+
+### 2. Switch Persona System (Bộ chuyển vai trò Toàn sàn)
+- **Header Pill Trigger:** Viên thuốc bo tròn với viền hổ phách mờ `px-3 py-1.5 rounded-full bg-amber-500/10 text-amber-900 border border-amber-300/80`, biểu tượng `sync_alt` xoay 180° khi hover.
+- **Floating Global Widget:** Nút nổi góc dưới bên phải màn hình `fixed bottom-6 right-6 z-40 bg-surface-container-highest/90 backdrop-blur-md shadow-xl border border-outline-variant/40`, hỗ trợ chuyển tức thì giữa 4 vai trò mà không cần đăng nhập lại.
+- **Trạng thái lưu trữ:** Đồng bộ thời gian thực qua `localStorage.setItem('craftlink_current_role', role)`.
+
+### 3. Modal & Overlay Lifecycle (Quy chuẩn Hộp thoại An toàn)
+- **Quy tắc hiển thị nghiêm ngặt:** `.modal-hidden { display: none !important; }` để triệt tiêu hoàn toàn nguy cơ bị ghi đè bởi Tailwind CSS utility classes (`.flex`, `.grid`, `.block`).
+- **Lớp phủ nền (Backdrop):** `fixed inset-0 bg-primary/50 backdrop-blur-sm z-50`.
+- **Cơ chế đóng an toàn:** Tự động lắng nghe phím `Escape` và sự kiện click ra vùng nền mờ bên ngoài dialog (`e.target === backdrop`).
+
+### 4. Mobile Navigation Drawer (Khay điều hướng Di động)
+- **Cơ chế kích hoạt:** Nút Hamburger (`#mobile-menu-btn`) xuất hiện trên màn hình `< 1024px`.
+- **Hiệu ứng trượt:** Khay menu trượt êm ái từ cạnh phải màn hình với `transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)`.
+- **Nội dung khay:** Danh mục liên kết theo vai trò, thẻ chuyển đổi nhanh 4 vai trò và nút đăng xuất trực tiếp.

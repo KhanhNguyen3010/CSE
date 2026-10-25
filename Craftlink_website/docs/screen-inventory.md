@@ -2,19 +2,20 @@
 
 > **Dự án:** CraftLink – Sàn sản phẩm sáng tạo tùy biến  
 > **Học phần:** Phát triển ứng dụng web cơ bản – CSE122  
-> **Ngày cập nhật:** 25/10/2026  
+> **Ngày cập nhật:** 25/10/2026 (Phiên bản hợp nhất toàn diện 4 Vai trò)  
 
 ---
 
 ## 1. Tổng quan các vai trò
 
-| Vai trò | Số màn hình đã triển khai | Trạng thái |
-|---|:---:|---|
-| Dùng chung (Public) | 5 | ✅ Đã triển khai |
-| Khách hàng (Buyer) | 4 | ✅ Đã triển khai |
-| Người sáng tạo (Maker) | 3 | 🔲 Chưa triển khai |
-| Kiểm duyệt viên (Moderator) | 3 | 🔲 Chưa triển khai |
-| Quản trị viên (Admin) | 3 | 🔲 Chưa triển khai |
+| Vai trò | Số màn hình đã triển khai | Thư mục chính | Trạng thái |
+|---|:---:|---|:---:|
+| Dùng chung (Public / Core) | 5 | `Craftlink_website/`, `pages/` | ✅ Đã triển khai |
+| Khách hàng (Buyer - SV1) | 4 | `pages/` | ✅ Đã triển khai |
+| Người sáng tạo / Nghệ nhân (Maker - SV2) | 6+ | `seller/` | ✅ Đã triển khai |
+| Kiểm duyệt viên (Moderator - SV3) | 3 | `admin/pages/` | ✅ Đã triển khai |
+| Quản trị viên (Admin - SV3) | 3 | `admin/pages/`, `admin/` | ✅ Đã triển khai |
+| **Bộ chuyển vai trò (Switch Persona)** | **Toàn hệ thống** | `assets/js/role-switcher.js` | ✅ **Hoạt động đa chiều** |
 
 ---
 
@@ -22,235 +23,218 @@
 
 ### 2.1. Màn hình dùng chung (Public / Shared)
 
-| # | Tệp | Giao diện | CRUD / Trạng thái | AI | Mô tả chính | Trạng thái |
-|:---:|---|---|---|:---:|---|:---:|
-| S-01 | `index.html` | Trang chủ | R | — | Hero section, bộ sưu tập nổi bật, danh mục, chỉ số tác động xã hội, câu chuyện nghệ nhân, footer | ✅ |
-| S-02 | `pages/login.html` | Đăng nhập / Đăng ký | R | — | Form đăng nhập với email/mật khẩu, chuyển tab đăng ký, đăng nhập Google/Facebook, quên mật khẩu | ✅ |
-| S-03 | `pages/impact.html` | Về chúng tôi & Tác động | R | — | Sứ mệnh CraftLink, bản đồ nghệ nhân, chỉ số tác động, câu chuyện cộng đồng, timeline lịch sử | ✅ |
-| S-04 | `pages/product.html` | Chi tiết sản phẩm | R | — | Gallery ảnh, thông tin sản phẩm, tab mô tả/đánh giá/câu chuyện, bộ đếm số lượng, thêm giỏ hàng | ✅ |
-| S-05 | `pages/buyer-cart.html` | Giỏ hàng | R/U/D | — | Danh sách sản phẩm trong giỏ, tăng/giảm số lượng, xóa, tổng tiền, nút thanh toán | ✅ |
+| # | Tệp | Giao diện | CRUD / Trạng thái | AI | Mô tả chính | Người phụ trách | Trạng thái |
+|:---:|---|---|---|:---:|---|:---:|:---:|
+| S-01 | `index.html` | Trang chủ | R | — | Hero section, bộ sưu tập nổi bật, danh mục di sản, chỉ số tác động xã hội, câu chuyện nghệ nhân, Switch Persona | SV1 | ✅ |
+| S-02 | `pages/login.html` | Đăng nhập chung tập trung | R/U | — | Cổng đăng nhập hợp nhất 4 vai trò: 1-Click Demo Quick Switch, phân luồng email thông minh, chuyển hướng tự động | SV1 & SV3 | ✅ |
+| S-03 | `pages/impact.html` | Về chúng tôi & Tác động | R | — | Sứ mệnh CraftLink, bản đồ nghệ nhân, chỉ số tác động cộng đồng, timeline lịch sử di sản | SV1 | ✅ |
+| S-04 | `pages/product.html` | Chi tiết sản phẩm | R | — | Gallery ảnh đa góc, thông tin chất liệu, câu chuyện bản sắc, đếm số lượng, thêm giỏ hàng | SV1 | ✅ |
+| S-05 | `pages/buyer-cart.html` | Giỏ hàng | R/U/D | — | Quản lý sản phẩm giỏ hàng, cập nhật số lượng, xóa, tính tổng tiền, mô phỏng đặt hàng | SV1 | ✅ |
 
-### 2.2. Khách hàng (Buyer)
+### 2.2. Khách hàng (Buyer - Phụ trách: SV1)
 
-| # | Tệp | Giao diện | Mục tiêu người dùng | Nhiệm vụ người dùng | CRUD / Trạng thái | AI | Người phụ trách | Trạng thái |
-|:---:|---|---|---|---|---|:---:|---|:---:|
-| B-01 | `pages/buyer-marketplace.html` | Sàn Khám Phá (Marketplace) | Tìm sản phẩm thủ công | Duyệt, tìm kiếm, lọc theo dân tộc / vùng miền / chất liệu / giá, sắp xếp | R | AI-2 (Style Matcher – gợi ý) | SV1 | ✅ |
-| B-02 | `pages/buyer-custom-brief.html` | Tạo Yêu Cầu Tùy Biến (Brief) | Diễn đạt yêu cầu tùy biến | Điền form brief: tiêu đề, danh mục, số lượng, ngân sách, mô tả, deadline; xem trước; gửi brief | C/R/U | AI-1 (Brief Builder – chuyển mô tả → brief) | SV1 | ✅ |
-| B-03 | `pages/buyer-orders.html` | Đơn Hàng Tùy Biến | Theo dõi đơn tùy biến | Xem danh sách đơn, lọc theo trạng thái (chờ, đang làm, hoàn thành, hủy), xem chi tiết, hủy đơn | C/R/U/D | AI-3 (Revision Summarizer) | SV1 | ✅ |
-| B-04 | `pages/buyer-cart.html` | Giỏ Hàng | Quản lý giỏ hàng | Xem giỏ, thay đổi số lượng, xóa, tính tổng | R/U/D | — | SV1 | ✅ |
+| # | Tệp | Giao diện | Mục tiêu người dùng | Nhiệm vụ người dùng | CRUD / Trạng thái | AI | Trạng thái |
+|:---:|---|---|---|---|---|:---:|:---:|
+| B-01 | `pages/buyer-marketplace.html` | Sàn Khám Phá (Marketplace) | Tìm sản phẩm thủ công | Duyệt, tìm kiếm, lọc theo dân tộc / vùng miền / chất liệu / giá, sắp xếp | R | AI-2 (Style Matcher) | ✅ |
+| B-02 | `pages/buyer-custom-brief.html` | Tạo Yêu Cầu Tùy Biến (Brief) | Diễn đạt yêu cầu tùy biến | Điền form brief: tiêu đề, ngân sách, mô tả, deadline, đính kèm ảnh; xem trước; lưu vào LocalStorage | C/R/U | AI-1 (Brief Builder) | ✅ |
+| B-03 | `pages/buyer-orders.html` | Quản lý Đơn Hàng Tùy Biến | Theo dõi tiến độ chế tác | Xem danh sách đơn, lọc theo trạng thái (chờ, đang làm, hoàn thành, hủy), xem chi tiết, hủy đơn | C/R/U/D | AI-3 (Revision Summarizer) | ✅ |
+| B-04 | `pages/buyer-cart.html` | Giỏ hàng & Thanh toán | Quản lý đơn giỏ | Xem giỏ, thay đổi số lượng, xóa, tính tổng hóa đơn | R/U/D | — | ✅ |
 
-### 2.3. Người sáng tạo (Maker) – *Chưa triển khai*
+### 2.3. Người sáng tạo / Nghệ nhân (Maker / Seller - Phụ trách: SV2)
 
-| # | Tệp (dự kiến) | Giao diện | Mục tiêu người dùng | Nhiệm vụ người dùng | CRUD / Trạng thái | AI | Người phụ trách | Trạng thái |
-|:---:|---|---|---|---|---|:---:|---|:---:|
-| M-01 | `pages/maker-listing-management.html` | Quản lý Listing | Quản lý sản phẩm đăng bán | Xem danh sách listing, thêm/sửa/xóa listing, xem trạng thái duyệt | C/R/U/D | — | SV2 | 🔲 |
-| M-02 | `pages/maker-brief-inbox.html` | Hộp Brief Nhận Được | Xem và phản hồi brief | Xem brief từ khách, lọc, chấp nhận/từ chối brief | R/U | AI-2 (Style Matcher) | SV2 | 🔲 |
-| M-03 | `pages/maker-proposal-editor.html` | Soạn Proposal | Gửi đề xuất cho brief | Tạo/sửa/xóa proposal, đính kèm ảnh, gửi cho khách | C/R/U/D | AI-3 (Revision Summarizer) | SV2 | 🔲 |
+| # | Tệp | Giao diện | Mục tiêu người dùng | Nhiệm vụ người dùng | CRUD / Trạng thái | AI | Trạng thái |
+|:---:|---|---|---|---|---|:---:|:---:|
+| M-01 | `seller/dashboard.html` | Bảng điều khiển Xưởng | Quản lý hiệu suất xưởng | Theo dõi doanh thu, trạng thái đơn chế tác, chỉ số brief mới, chuyển nhanh vai | R | — | ✅ |
+| M-02 | `seller/brief-inbox.html` | Hộp Brief Nhận Được | Xem và phản hồi brief của khách | Nhận brief từ Buyer (qua LocalStorage), lọc theo trạng thái, xem modal chi tiết, từ chối/tiếp nhận | R/U | AI-2 (Style Matcher) | ✅ |
+| M-03 | `seller/proposal-editor.html` | Soạn Đề Xuất (Proposal) | Gửi báo giá & kế hoạch chế tác | Soạn chi phí vật liệu, nhân công, mốc thời gian, đính kèm ảnh mẫu, gửi cho Buyer | C/R/U/D | AI-3 (Revision Summarizer) | ✅ |
+| M-04 | `seller/products.html` | Quản lý Sản Phẩm (Listing) | Quản lý danh mục hàng bán | Xem danh sách listing, lọc kho hàng, xem trạng thái kiểm duyệt, xóa sản phẩm | C/R/U/D | — | ✅ |
+| M-05 | `seller/product-form.html` | Thêm / Sửa Sản Phẩm | Đăng bán tác phẩm mới | Nhập thông tin di sản, tải ảnh, chứng nhận làng nghề, gửi hàng đợi kiểm duyệt | C/U | — | ✅ |
+| M-06 | `seller/orders.html` | Quản lý Đơn Hàng | Theo dõi giao hàng & chế tác | Cập nhật tiến độ hoàn thiện tác phẩm, chi tiết đơn hàng (`order-detail.html`) | R/U | — | ✅ |
 
-### 2.4. Kiểm duyệt viên (Moderator) – *Chưa triển khai*
+### 2.4. Kiểm duyệt viên (Moderator - Phụ trách: SV3)
 
-| # | Tệp (dự kiến) | Giao diện | Mục tiêu người dùng | Nhiệm vụ người dùng | CRUD / Trạng thái | AI | Người phụ trách | Trạng thái |
-|:---:|---|---|---|---|---|:---:|---|:---:|
-| D-01 | `pages/moderator-moderation-queue.html` | Hàng Đợi Kiểm Duyệt | Duyệt listing mới | Xem listing chờ duyệt, phê duyệt/từ chối, ghi lý do | R/U | — | SV3 | 🔲 |
-| D-02 | `pages/moderator-report-center.html` | Trung Tâm Báo Cáo | Xử lý báo cáo vi phạm | Xem báo cáo, phân loại, xử lý (cảnh cáo/gỡ bài/khóa), lịch sử xử lý | C/R/U | — | SV3 | 🔲 |
-| D-03 | `pages/moderator-content-guidelines.html` | Quy Tắc Nội Dung | Quản lý quy tắc cộng đồng | Xem/thêm/sửa/xóa quy tắc nội dung | C/R/U/D | — | SV3 | 🔲 |
+| # | Tệp | Giao diện | Mục tiêu người dùng | Nhiệm vụ người dùng | CRUD / Trạng thái | AI | Trạng thái |
+|:---:|---|---|---|---|---|:---:|:---:|
+| D-01 | `admin/pages/moderation.html` | Hàng Đợi Kiểm Duyệt Di Sản | Duyệt listing & chứng nhận | Thẩm định sản phẩm làng nghề mới, kiểm tra tiêu chuẩn WFTO, phê duyệt hoặc từ chối có lý do | R/U | — | ✅ |
+| D-02 | `admin/pages/moderation.html` | Quản Trị Từ Khóa Cấm | Chống gian lận & từ ngữ xấu | Thêm từ khóa cấm, xóa từ khóa, mô phỏng quét tự động nội dung vi phạm | C/R/D | Quét từ khóa tự động | ✅ |
+| D-03 | `admin/pages/moderation.html` | Trung Tâm Xử Lý Kháng Án | Giải quyết khiếu nại của Maker | Xem đơn kháng án của Maker, mở modal quyết định: Giữ nguyên từ chối / Đảo ngược quyết định / Chuyển hội đồng | R/U | — | ✅ |
 
-### 2.5. Quản trị viên (Admin) – *Chưa triển khai*
+### 2.5. Quản trị viên (Admin - Phụ trách: SV3)
 
-| # | Tệp (dự kiến) | Giao diện | Mục tiêu người dùng | Nhiệm vụ người dùng | CRUD / Trạng thái | AI | Người phụ trách | Trạng thái |
-|:---:|---|---|---|---|---|:---:|---|:---:|
-| A-01 | `pages/admin-category-management.html` | Quản Lý Danh Mục | Quản lý taxonomy | Xem cây danh mục, thêm/sửa/xóa danh mục, sắp xếp thứ tự | C/R/U/D | — | SV3 | 🔲 |
-| A-02 | `pages/admin-user-management.html` | Quản Lý Người Dùng | Quản lý tài khoản | Xem danh sách, tìm kiếm, lọc theo vai trò, khóa/mở khóa tài khoản | R/U | — | SV3 | 🔲 |
-| A-03 | `pages/admin-platform-dashboard.html` | Bảng Điều Khiển Nền Tảng | Tổng quan nền tảng | Xem chỉ số KPI, biểu đồ doanh thu/đơn hàng, thống kê người dùng | R | — | SV3 | 🔲 |
+| # | Tệp | Giao diện | Mục tiêu người dùng | Nhiệm vụ người dùng | CRUD / Trạng thái | AI | Trạng thái |
+|:---:|---|---|---|---|---|:---:|:---:|
+| A-01 | `admin/pages/dashboard.html` / `admin/index.html` | Bảng Điều Khiển Nền Tảng | Giám sát toàn sàn | Theo dõi KPI doanh thu, tăng trưởng người dùng, biểu đồ giao dịch, ghi đè trạng thái tranh chấp (Override Dispute) | R/U | — | ✅ |
+| A-02 | `admin/pages/content.html` | Quản Lý Danh Mục & Taxonomy | Quản lý phân loại di sản | Xem cây danh mục, thêm mới, sửa slug/thứ tự, chuyển đổi trạng thái, xóa danh mục | C/R/U/D | — | ✅ |
+| A-03 | `admin/pages/users.html` | Quản Lý Tài Khoản & Quyền | Quản trị thành viên sàn | Tìm kiếm, lọc theo vai trò (Buyer, Maker, Mod, Admin), đổi quyền, khóa/mở tài khoản, cấp lại mật khẩu | C/R/U/D | — | ✅ |
 
 ---
 
 ## 3. Ma trận Tính năng AI
 
-| Tính năng AI | Mô tả | Màn hình áp dụng | Cách mô phỏng | Trạng thái |
+| Tính năng AI | Mô tả | Màn hình áp dụng | Cơ chế triển khai / Mô phỏng | Trạng thái |
 |---|---|---|---|:---:|
-| **AI-1: Brief Builder** | Chuyển mô tả tự do thành creative brief có cấu trúc | B-02 (buyer-custom-brief) | JSON giả lập + JavaScript timeout mô phỏng xử lý | ✅ |
-| **AI-2: Style Matcher** | Ghép brief/yêu cầu với maker/listing phù hợp | B-01 (buyer-marketplace) | Thuật toán lọc rule-based dựa trên dân tộc, vùng miền, chất liệu | ✅ |
-| **AI-3: Revision Summarizer** | Tóm tắt các thay đổi revision cần làm | B-03 (buyer-orders) | Phản hồi định sẵn (canned responses) | ✅ |
+| **AI-1: Brief Builder** | Chuyển đổi mô tả tự do của khách thành bản Creative Brief có cấu trúc chuẩn | B-02 (`pages/buyer-custom-brief.html`) | Phân tích từ khóa JavaScript + mô phỏng phân tích gợi ý phong cách, chất liệu, hạn mức | ✅ |
+| **AI-2: Style Matcher** | Ghép cặp brief tùy biến với nghệ nhân / xưởng chế tác phù hợp về bản sắc văn hóa | B-01 (`buyer-marketplace.html`) & M-02 (`seller/brief-inbox.html`) | Thuật toán so khớp thuộc tính dân tộc, vùng miền (Tây Bắc, Tây Nguyên), chất liệu (chàm, thổ cẩm) | ✅ |
+| **AI-3: Revision Summarizer** | Tóm tắt ý kiến phản hồi sửa đổi nhiều vòng của khách để nghệ nhân cập nhật proposal | B-03 (`buyer-orders.html`) & M-03 (`seller/proposal-editor.html?mode=ai-revision`) | Tự động trích xuất ý chính từ `latestCustomerFeedback` và hiển thị giải pháp sửa đổi | ✅ |
 
 ---
 
-## 4. Bao phủ trạng thái
+## 4. Bao phủ trạng thái trên toàn hệ thống
 
-| Trạng thái | index | login | marketplace | custom-brief | orders | product | cart |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| Bình thường | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Đang tải | — | — | ✅ | ✅ | — | — | — |
-| Rỗng | — | — | ✅ | — | ✅ | — | ✅ |
-| Thành công | — | ✅ | — | ✅ | — | ✅ | — |
-| Lỗi (validation) | — | ✅ | — | ✅ | — | — | — |
-| Vô hiệu hóa | — | — | — | ✅ | — | — | — |
-| Đang chờ | — | — | — | — | ✅ | — | — |
-| Hoàn thành | — | — | — | — | ✅ | — | — |
-| Đã hủy | — | — | — | — | ✅ | — | — |
+| Trạng thái | Trang chủ | Đăng nhập | Sàn khám phá | Tạo Brief | Đơn hàng | Xưởng Maker | Kiểm duyệt Mod | Dashboard Admin |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **Bình thường (Normal)** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Đang tải (Loading)** | — | — | ✅ | ✅ | — | ✅ | ✅ | ✅ |
+| **Rỗng (Empty)** | — | — | ✅ | — | ✅ | ✅ | ✅ | — |
+| **Thành công (Success)** | — | ✅ | — | ✅ | — | ✅ | ✅ | ✅ |
+| **Lỗi validation (Error)** | — | ✅ | — | ✅ | — | ✅ | ✅ | ✅ |
+| **Vô hiệu hóa (Disabled)** | — | — | — | ✅ | — | ✅ | — | ✅ |
+| **Đang chờ (Pending)** | — | — | — | — | ✅ | ✅ | ✅ | — |
+| **Hoàn thành (Done)** | — | — | — | — | ✅ | ✅ | ✅ | ✅ |
+| **Đã hủy / Khóa (Banned)** | — | — | — | — | ✅ | ✅ | ✅ | ✅ |
 
 ---
 
-## 5. Sơ đồ User Flow
-
-### 5.1. Luồng chính – Khách hàng (Buyer)
+## 5. Sơ đồ User Flow liên vai trò (End-to-End Persona Flow)
 
 ```mermaid
 flowchart TD
-    START(["🏠 Trang chủ<br/>index.html"]) --> LOGIN["🔐 Đăng nhập<br/>login.html"]
-    START --> MARKET["🛒 Sàn Khám Phá<br/>buyer-marketplace.html"]
-    START --> IMPACT["🌿 Về chúng tôi & Tác động<br/>impact.html"]
-    START --> BRIEF["📝 Đặt Làm Riêng<br/>buyer-custom-brief.html"]
+    LOGIN["🔐 CỔNG ĐĂNG NHẬP CHUNG<br/>pages/login.html<br/>(1-Click Switch & Email Routing)"]
 
-    LOGIN -->|Đăng nhập thành công| START
-
-    MARKET -->|Click sản phẩm| PRODUCT["📦 Chi tiết sản phẩm<br/>product.html"]
-    MARKET -->|AI-2: Style Matcher| MARKET
-    MARKET -->|Tìm kiếm / Lọc| MARKET
-
-    PRODUCT -->|Thêm giỏ hàng| CART["🛍️ Giỏ hàng<br/>buyer-cart.html"]
-    PRODUCT -->|Quay lại| MARKET
-
-    CART -->|Thanh toán| CHECKOUT["💳 Thanh toán<br/>(chưa triển khai)"]
-    CART -->|Tiếp tục mua| MARKET
-
-    BRIEF -->|AI-1: Brief Builder| AI_BRIEF["🤖 AI sinh Brief<br/>→ Xem trước → Chấp nhận/Sửa"]
-    AI_BRIEF -->|Gửi Brief| ORDERS["📋 Đơn hàng tùy biến<br/>buyer-orders.html"]
-
-    ORDERS -->|Xem chi tiết đơn| ORDER_DETAIL["📄 Chi tiết đơn<br/>(modal trong buyer-orders)"]
-    ORDERS -->|AI-3: Revision Summarizer| AI_REVISION["🤖 AI tóm tắt revision"]
-    ORDERS -->|Hủy đơn| ORDERS
-
-    style START fill:#15251d,color:#fff
-    style LOGIN fill:#9a4526,color:#fff
-    style MARKET fill:#516258,color:#fff
-    style PRODUCT fill:#516258,color:#fff
-    style CART fill:#516258,color:#fff
-    style BRIEF fill:#516258,color:#fff
-    style ORDERS fill:#516258,color:#fff
-    style AI_BRIEF fill:#fd916c,color:#000
-    style AI_REVISION fill:#fd916c,color:#000
-    style IMPACT fill:#516258,color:#fff
-    style CHECKOUT fill:#ccc,color:#666
-    style ORDER_DETAIL fill:#e9e8e3,color:#1b1c19
-```
-
-### 5.2. Luồng tổng quan – Tất cả vai trò (Dự kiến)
-
-```mermaid
-flowchart LR
-    subgraph PUBLIC["🌐 Công khai"]
-        HOME["Trang chủ"]
-        LOGIN["Đăng nhập"]
-        IMPACT["Tác động"]
+    subgraph BUYER_FLOW["👤 VAI TRÒ KHÁCH HÀNG (BUYER)"]
+        B1["Trang chủ / Sàn khám phá<br/>buyer-marketplace.html"]
+        B2["Soạn yêu cầu tùy biến<br/>buyer-custom-brief.html"]
+        B3["Lưu Brief vào LocalStorage<br/>craftlink_briefs"]
+        B4["Theo dõi đơn hàng & Revision<br/>buyer-orders.html"]
     end
 
-    subgraph BUYER["👤 Khách hàng"]
-        B_MARKET["Sàn Khám Phá"]
-        B_PRODUCT["Chi tiết SP"]
-        B_CART["Giỏ hàng"]
-        B_BRIEF["Tạo Brief"]
-        B_ORDERS["Đơn hàng"]
+    subgraph MAKER_FLOW["🎨 VAI TRÒ NGHỆ NHÂN (MAKER)"]
+        M1["Bảng điều khiển xưởng<br/>seller/dashboard.html"]
+        M2["Hộp thư Briefs nhận được<br/>seller/brief-inbox.html"]
+        M3["Soạn đề xuất & AI Revision<br/>seller/proposal-editor.html"]
+        M4["Đăng bán sản phẩm mới<br/>seller/products.html"]
     end
 
-    subgraph MAKER["🎨 Người sáng tạo"]
-        M_LISTING["Quản lý Listing"]
-        M_INBOX["Brief Inbox"]
-        M_PROPOSAL["Soạn Proposal"]
+    subgraph MOD_FLOW["🛡️ VAI TRÒ KIỂM DUYỆT (MODERATOR)"]
+        D1["Hàng đợi duyệt xuất xứ<br/>admin/pages/moderation.html"]
+        D2["Quản lý từ khóa cấm & Quét"]
+        D3["Xử lý kháng án & Quyết định"]
     end
 
-    subgraph MODERATOR["🛡️ Kiểm duyệt viên"]
-        D_QUEUE["Hàng đợi duyệt"]
-        D_REPORT["Trung tâm báo cáo"]
-        D_GUIDE["Quy tắc nội dung"]
+    subgraph ADMIN_FLOW["⚙️ VAI TRÒ QUẢN TRỊ VIÊN (ADMIN)"]
+        A1["Dashboard KPI & Doanh thu<br/>admin/pages/dashboard.html"]
+        A2["Quản trị cây danh mục di sản<br/>admin/pages/content.html"]
+        A3["Quản lý tài khoản & Phân quyền<br/>admin/pages/users.html"]
     end
 
-    subgraph ADMIN["⚙️ Quản trị viên"]
-        A_CATEGORY["Quản lý danh mục"]
-        A_USER["Quản lý người dùng"]
-        A_DASHBOARD["Dashboard"]
-    end
+    LOGIN -->|Khách hàng| B1 --> B2 --> B3 --> B4
+    B3 -.->|Chuyển giao Brief| M2
+    M1 --> M2 --> M3
+    M4 -.->|Chờ thẩm định| D1
+    D1 --> D2 --> D3
+    A1 --> A2 --> A3
 
-    HOME --> LOGIN
-    LOGIN --> B_MARKET
-    LOGIN --> M_LISTING
-    LOGIN --> D_QUEUE
-    LOGIN --> A_DASHBOARD
+    %% Switch Persona Navigation
+    SW["🔄 BỘ CHUYỂN VAI TRÒ (SWITCH PERSONA WIDGET)<br/>Header Button + Floating Widget (role-switcher.js)"]
+    BUYER_FLOW <--> SW
+    MAKER_FLOW <--> SW
+    MOD_FLOW <--> SW
+    ADMIN_FLOW <--> SW
 
-    B_MARKET --> B_PRODUCT --> B_CART
-    B_BRIEF --> B_ORDERS
-    B_ORDERS -.->|Proposal| M_INBOX
-    M_INBOX --> M_PROPOSAL
-    M_LISTING -.->|Chờ duyệt| D_QUEUE
-    D_REPORT -.->|Vi phạm| A_USER
-
-    style PUBLIC fill:#faf9f4,stroke:#737874
-    style BUYER fill:#d3e7da,stroke:#15251d
-    style MAKER fill:#ffdbcf,stroke:#9a4526
-    style MODERATOR fill:#ffddb1,stroke:#311e00
-    style ADMIN fill:#e9e8e3,stroke:#1b1c19
+    %% Logout flow
+    A1 -->|Đăng xuất| LOGIN
+    D1 -->|Đăng xuất| LOGIN
+    M1 -->|Đăng xuất| LOGIN
 ```
 
 ---
 
-## 6. Cấu trúc tệp dự án hiện tại
+## 6. Cấu trúc tệp dự án sau khi hợp nhất
 
 ```
 Craftlink_website/
-├── index.html                          ← S-01: Trang chủ
+├── index.html                                  ← Trang chủ nền tảng (Buyer)
 ├── pages/
-│   ├── login.html                      ← S-02: Đăng nhập
-│   ├── buyer-marketplace.html          ← B-01: Sàn Khám Phá
-│   ├── buyer-custom-brief.html         ← B-02: Tạo Brief
-│   ├── buyer-orders.html               ← B-03: Đơn hàng
-│   ├── buyer-cart.html                 ← B-04: Giỏ hàng
-│   ├── product.html                    ← S-04: Chi tiết SP
-│   └── impact.html                     ← S-03: Tác động
+│   ├── login.html                              ← Cổng đăng nhập chung cho cả 4 vai trò
+│   ├── buyer-marketplace.html                  ← Sàn khám phá sản phẩm di sản (Buyer)
+│   ├── buyer-custom-brief.html                 ← Tạo yêu cầu tùy biến riêng (Buyer)
+│   ├── buyer-orders.html                       ← Quản lý đơn hàng tùy biến (Buyer)
+│   ├── buyer-cart.html                         ← Giỏ hàng & thanh toán (Buyer)
+│   ├── product.html                            ← Chi tiết tác phẩm di sản (Buyer)
+│   └── impact.html                             ← Tác động xã hội & cộng đồng làng nghề (Buyer)
+├── seller/                                     ← PHÂN HỆ NGHỆ NHÂN / NGƯỜI BÁN (MAKER - SV2)
+│   ├── dashboard.html                          ← Bảng điều khiển hiệu suất xưởng thủ công
+│   ├── brief-inbox.html                        ← Hộp thư tiếp nhận brief từ Buyer
+│   ├── proposal-editor.html                    ← Soạn đề xuất chế tác & AI Revision
+│   ├── products.html                           ← Quản lý danh mục sản phẩm đăng bán
+│   ├── product-form.html                       ← Biểu mẫu đăng bán sản phẩm mới
+│   ├── orders.html & order-detail.html         ← Quản lý đơn hàng & chi tiết chế tác
+│   ├── inventory.html                          ← Quản lý kho nguyên vật liệu
+│   ├── revenue.html                            ← Báo cáo doanh số & lợi nhuận
+│   ├── promotions.html                         ← Chương trình ưu đãi khách hàng
+│   ├── reviews-messages.html                   ← Đánh giá tác phẩm & tin nhắn
+│   ├── shop-profile.html & settings.html       ← Hồ sơ xưởng thủ công & cấu hình
+│   ├── seller-data.js                          ← Mock data chuyên biệt phân hệ Maker
+│   ├── seller.js                               ← Logic layout, header, drawer và switch persona Maker
+│   └── login.html                              ← Tự động chuyển hướng về pages/login.html
+├── admin/                                      ← PHÂN HỆ KIỂM DUYỆT & QUẢN TRỊ (MOD & ADMIN - SV3)
+│   ├── index.html                              ← Lối vào Bảng quản trị tổng hợp
+│   ├── pages/
+│   │   ├── dashboard.html                      ← Bảng điều khiển KPI & Override Dispute (Admin)
+│   │   ├── moderation.html                     ← Hàng đợi kiểm duyệt di sản & Kháng án (Moderator)
+│   │   ├── content.html                        ← Quản lý Danh mục & Phân loại Taxonomy (Admin)
+│   │   ├── users.html                          ← Quản lý Tài khoản & Phân quyền 4 role (Admin)
+│   │   └── login.html                          ← Tự động chuyển hướng về pages/login.html
+│   ├── js/
+│   │   ├── common/
+│   │   │   ├── header.js                       ← Header kính mờ đồng bộ Buyer, Mobile Drawer
+│   │   │   ├── sidebar.js                      ← Đăng xuất logoutDemo() chuẩn hóa
+│   │   │   ├── modal.js                        ← Quản lý đóng mở modal an toàn (Escape, backdrop)
+│   │   │   └── notification.js                 ← Chuông thông báo hệ thống realtime
+│   │   └── pages/                              ← Logic nghiệp vụ từng trang admin/moderation
+│   ├── css/                                    ← Stylesheet cấu phần admin
+│   └── login.html                              ← Tự động chuyển hướng về pages/login.html
 ├── assets/
 │   ├── css/
-│   │   ├── colors.css                  ← Design tokens (màu)
-│   │   └── base.css                    ← Typography base
+│   │   ├── base.css                            ← Quy tắc responsive nền tảng, modal utilities
+│   │   ├── colors.css                          ← Hệ thống mã màu thổ cẩm & đất nung
+│   │   └── tailwind.css                        ← Tailwind stylesheet dựng sẵn
 │   └── js/
-│       ├── data.js                     ← Mock data sản phẩm
-│       ├── thocam.js                   ← Logic marketplace (filter, search, pagination, AI-2)
-│       ├── product.js                  ← Logic chi tiết sản phẩm (tab, gallery, quantity)
-│       └── tailwind-config.js          ← Cấu hình Tailwind CSS
+│       ├── role-switcher.js                    ← Hệ thống Switch Persona chuyển vai toàn sàn
+│       ├── responsive-nav.js                   ← Tự động điều khiển Navbar/Drawer theo kích thước
+│       ├── data.js                             ← Mock data sản phẩm di sản ban đầu
+│       ├── thocam.js                           ← Logic bộ lọc đa tiêu chí sàn khám phá
+│       └── tailwind-config.js                  ← Cấu hình Tailwind theme tokens
 └── docs/
-    ├── assignment-craftlink.md         ← Đề bài BTL
-    ├── design-system.md                ← Hệ thống thiết kế (design tokens)
-    ├── screen-inventory.md             ← Bảng kiểm kê màn hình (tệp này)
-    ├── ai-usage-report.md              ← Báo cáo sử dụng AI
-    └── mockups/                        ← Ảnh mockup các trang
-        ├── homepage.png
-        ├── impact.png
-        ├── product.png
-        ├── screen.png
-        └── thocam.png
+    ├── assignment-craftlink.md                 ← Đặc tả đề bài BTL-11
+    ├── design-system.md                        ← Hệ thống thiết kế chuẩn hóa đa vai trò
+    ├── screen-inventory.md                     ← Bảng kiểm kê màn hình chi tiết (tệp này)
+    └── ai-usage-report.md                      ← Báo cáo trung thực sử dụng công cụ AI
 ```
 
 ---
 
-## 7. Dữ liệu & API
+## 7. Dữ liệu & Lưu trữ tương tác
 
-| Nguồn dữ liệu | Mô tả | File / Endpoint |
+| Nguồn dữ liệu | Cơ chế tương tác | Phạm vi áp dụng |
 |---|---|---|
-| Mock Products (local) | 6 sản phẩm thổ cẩm với ảnh, giá, dân tộc, chất liệu | `assets/js/data.js` |
-| Mock API (Postman) | API giả lập lấy danh sách sản phẩm | `https://81fed15e-...mock.pstmn.io/products` |
-| LocalStorage | Lưu briefs đã tạo (`craftlink_briefs`) | Browser LocalStorage |
+| **LocalStorage (`craftlink_briefs`)** | Lưu trữ CRUD brief từ Buyer và tải sang Brief Inbox của Maker | Khách hàng đặt làm riêng $\leftrightarrow$ Nghệ nhân nhận việc |
+| **LocalStorage (`craftlink_current_role`)** | Ghi nhớ vai trò hiện tại khi chuyển trang hoặc đăng nhập | Switch Persona toàn hệ sinh thái |
+| **Mock Products Data (`data.js`)** | 6+ bộ sưu tập di sản bản địa có xuất xứ làng nghề | Buyer Marketplace, Chi tiết sản phẩm |
+| **Seller Data Module (`seller-data.js`)** | Kho dữ liệu đơn chế tác, proposal, kho hàng xưởng | Toàn bộ phân hệ Maker |
+| **Admin In-Memory State (`data.js`)** | Dữ liệu kiểm duyệt, danh mục, phân quyền tài khoản, từ khóa cấm | Toàn bộ phân hệ Moderator & Admin |
 
 ---
 
-## 8. Checklist hoàn thành từng màn hình
+## 8. Bảng kiểm tra chất lượng hoàn thành (Checklist)
 
-### Ký hiệu: ✅ = Đã xong | 🔲 = Chưa làm | ⏳ = Đang làm
-
-| Tiêu chí | S-01 | S-02 | S-03 | S-04 | S-05 | B-01 | B-02 | B-03 |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| HTML ngữ nghĩa | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| CSS hoàn chỉnh | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Responsive | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Tương tác JavaScript | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Validation (nếu có form) | — | ✅ | — | — | — | — | ✅ | — |
-| Dữ liệu giả lập | ✅ | — | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Trạng thái rỗng | — | — | — | — | ✅ | ✅ | — | ✅ |
-| Trạng thái loading | — | — | — | — | — | ✅ | ✅ | — |
+| Tiêu chí kỹ thuật | Dùng chung (Public) | Buyer (SV1) | Maker (SV2) | Moderator (SV3) | Admin (SV3) |
+|---|:---:|:---:|:---:|:---:|:---:|
+| **HTML Semantic** | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **CSS Design System** | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Responsive (320px - 1440px)** | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Tương tác DOM / JavaScript** | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Kiểm tra hợp lệ biểu mẫu (Validation)** | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Dữ liệu giả lập & Liên kết Role** | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Trải nghiệm mô phỏng AI** | — | ✅ (AI-1, AI-2) | ✅ (AI-2, AI-3) | ✅ (Auto-Scan) | — |
+| **Switch Persona & Logout đồng bộ** | ✅ | ✅ | ✅ | ✅ | ✅ |
